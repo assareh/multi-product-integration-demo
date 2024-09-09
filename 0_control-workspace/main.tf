@@ -39,7 +39,7 @@ resource "tfe_workspace" "networking" {
 
   working_directory = "1_networking"
   queue_all_runs = false
-  assessments_enabled = false
+  assessments_enabled = true
   global_remote_state = true
 }
 
@@ -56,7 +56,7 @@ resource "tfe_workspace" "hcp_clusters" {
 
   working_directory = "2_hcp-clusters"
   queue_all_runs = false
-  assessments_enabled = false
+  assessments_enabled = true
   global_remote_state = true
 }
 
@@ -73,7 +73,7 @@ resource "tfe_workspace" "vault_auth_config" {
 
   working_directory = "3_vault-auth-config"
   queue_all_runs = false
-  assessments_enabled = false
+  assessments_enabled = true
   global_remote_state = true
 }
 
@@ -90,7 +90,7 @@ resource "tfe_workspace" "boundary_config" {
 
   working_directory = "4_boundary-config"
   queue_all_runs = false
-  assessments_enabled = false
+  assessments_enabled = true
   global_remote_state = true
 }
 

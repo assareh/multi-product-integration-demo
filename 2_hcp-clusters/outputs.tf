@@ -50,3 +50,36 @@ output "subnet_cidrs" {
 output "hvn_sg_id" {
   value = data.terraform_remote_state.networking.outputs.hvn_sg_id
 }
+
+check "boundary_health_check" {
+  data "http" "boundary_public_endpoint" {
+    url = hcp_boundary_cluster.hashistack.cluster_url
+  }
+
+  assert {
+    condition = data.http.boundary_public_endpoint.status_code == 200
+    error_message = "${data.http.boundary_public_endpoint.url} returned an unhealthy status code"
+  }
+}
+
+check "consul_health_check" {
+  data "http" "consul_public_endpoint" {
+    url = hcp_consul_cluster.hashistack.consul_public_endpoint_url
+  }
+
+  assert {
+    condition = data.http.consul_public_endpoint.status_code == 200
+    error_message = "${data.http.consul_public_endpoint.url} returned an unhealthy status code"
+  }
+}
+
+check "vault_health_check" {
+  data "http" "vault_public_endpoint" {
+    url = hcp_vault_cluster.hashistack.vault_public_endpoint_url
+  }
+
+  assert {
+    condition = data.http.vault_public_endpoint.status_code == 200
+    error_message = "${data.http.vault_public_endpoint.url} returned an unhealthy status code"
+  }
+}
